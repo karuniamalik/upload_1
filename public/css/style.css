@@ -1,0 +1,45 @@
+.nav-item {
+    margin-right: 24px;
+    font-weight: 200;
+    /* margin: 10px 10px; */
+}
+
+.nav-item a.active {
+    color: #F9B234 !important;
+    font-weight: 600;
+}
+
+.nav-item input {
+    text-transform: uppercase;
+}
+
+.nav-item input.btn-dark:hover {
+    background-color: white;
+    color: black;
+}
+
+.nav-item img {
+    /* height: 30px; */
+    width: 30px;
+}
+
+
+/* carousel */
+
+.carousel {
+    height: 450px;
+    background-color: #171717;
+    color: white;
+}
+
+.carousel h1 {
+    font-family: 'Lora';
+}
+
+.carousel p {
+    font-weight: 200;
+}
+
+a:hover#navbarDropdown {
+    color: red;
+}
