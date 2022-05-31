@@ -38,15 +38,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#"><img src="{{ asset('img/cart.png') }}" alt=""></a>
                 </li>
-                <li class="nav-item ">
-                    {{-- <a class="nav-link" href="#">MASUK</a> --}}
-                    <input class="btn btn-dark border-light px-4" type="submit" value="Masuk">
+                <li class="nav-item ">                  
+                    <a class="nav-link btn btn-dark border-light px-4" href="{{ url('login') }}">MASUK</a>                                   
                 </li>
                 <li class="nav-item me-0">
-                    {{-- <a class="nav-link" href="#">DAFTAR</a> --}}
-                    <input class="btn btn-light px-4" type="submit" value="Daftar">
+              
+                    <a class="nav-link btn btn-dark px-4 border-light" href="{{ url('register') }}">DAFTAR</a>
+                   
+                 
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+ 
