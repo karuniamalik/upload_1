@@ -42,10 +42,8 @@
                     <a class="nav-link btn btn-dark border-light px-4" href="{{ url('login') }}">MASUK</a>                                   
                 </li>
                 <li class="nav-item me-0">
-              
-                    <a class="nav-link btn btn-dark px-4 border-light" href="{{ url('register') }}">DAFTAR</a>
-                   
-                 
+             
+                    <a class="nav-link btn btn-dark px-4 border-light" href="{{ url('register') }}">DAFTAR</a>                                   
                 </li>
             </ul>
         </div>
