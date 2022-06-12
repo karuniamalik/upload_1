@@ -22,7 +22,7 @@
                 <div class="mb-3">
                       {{-- @foreach ($data as $item) --}}
                     <label for="exampleInputPassword1" class="form-label">gambar</label>
-                   <input type="file" name="gambar" class="form-control-file" >
+                   <input type="file" name="gambar" class="form-control-file" value="{{ old ('gambar')}}">
                     {{-- <img class="img-thumbnail" src="storage/{{ $item->gambar }}" alt="k"> --}}
                    {{-- @endforeach --}}
                 </div>
@@ -61,14 +61,11 @@
                         <option selected>Pilih Kategori</option>
                         @foreach ($kategori as $ktgr)
                         <option value="{{ $ktgr->id }}">{{ $ktgr->kategori }}</option>
-
                         @endforeach
+
                     </select>
 
-
                 </div>
-
-
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

@@ -142,19 +142,24 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
         //
         $data = Barang::findOrFail($id);
-        $validated = $request->validate([
+        $validated = $req->validate([
             'nama_barang' => 'required',
             'spesifikasi' => 'required',
-            'gambar' => 'required',
+            'gambar' => 'required|image',
             'harga' => 'required',
             'stok' => 'required',
             'status' => 'required',
             'kategori_id' => 'required'
         ]);
+
+        if ($req->file('gambar')) {
+
+            $validated['gambar'] = $req->file('gambar')->store('img');
+        }
 
         $data->update($validated);
         return redirect('barang')->with('success', 'Data Berhasil di ubah');

@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\BarangController;
+use App\Models\Barang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +21,14 @@ use App\Http\Controllers\ProfilController;
 // pertama kali di buka
 
 Route::get('/', function () {
-  return view('welcome');
+  $data = Barang::all();
+  return view('welcome', compact('data'));
 });
 
 // Barang controller
 Route::middleware(['auth', 'admin'])->group(function () {
   Route::resource('barang', BarangController::class)->only('index', 'store', 'create', 'edit');
-  Route::post('barang/{id}', [BarangController::class, 'update']);
+  Route::put('barang/{id}', [BarangController::class, 'update']);
   Route::get('hapusbarang/{id}', [BarangController::class, 'destroy']);
   Route::get('export', [BarangController::class, 'export']);
   Route::post('/logout', [LoginController::class, 'logout']);
