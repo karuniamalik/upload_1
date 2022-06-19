@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::put('barang/{id}', [BarangController::class, 'update']);
   Route::get('hapusbarang/{id}', [BarangController::class, 'destroy']);
   Route::get('export', [BarangController::class, 'export']);
+  Route::post('/logout', [LoginController::class, 'logout']);
+
+  Route::resource('kategori', KategoriController::class)->only('index', 'store', 'create', 'edit');
+  Route::put('kategori/{id}', [KategoriController::class, 'update']);
+  Route::get('hapuskategori/{id}', [KategoriController::class, 'destroy']);
+  // Route::get('export', [KategoriController::class, 'export']);
   Route::post('/logout', [LoginController::class, 'logout']);
 });
 
