@@ -21,11 +21,11 @@
                 <div class="form-group">
                      <label for="exampleInputPassword1" class="form-label">Status</label>
                     <div class="form-radio">
-                        <input class="form-radio" name="status" type="radio" value="{{ $data->status }}" id="form-radio">
+                        <input class="form-radio" name="status" type="radio" value="on" {{ $data->status == 'on' ? 'checked' : '' }} id="form-radio">
                         <label class="form-check-label mr-3" for="form-radio">
                             On
                         </label>
-                        <input class="form-radio" name="status" type="radio" value="{{ $data->status }}" id="form-radio">
+                        <input class="form-radio" name="status" type="radio" value="off" {{ $data->status == 'off' ? 'checked' :'' }} id="form-radio">
                         <label class="form-check-label" for="form-radio">
                             Off
                         </label>
