@@ -51,8 +51,8 @@ function load(awal = '', akhir = '') {
                 name: 'status'
             },
             {
-                data: 'kategori_id',
-                name: 'kategori_id'
+                data: 'kategori',
+                name: 'kategori'
             },
             {
                 data: 'created_at',

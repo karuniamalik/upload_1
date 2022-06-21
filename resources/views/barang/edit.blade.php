@@ -21,10 +21,13 @@
                         value="{{ $data->spesifikasi  }}" name="spesifikasi">
                 </div>
                 <div class="mb-3">
+                  
                     <label for="exampleInputPassword1" class="form-label">Gambar</label>
-                    <input type="file" name="gambar" class="form-control-file" value="{{ $data->gambar }}" >
+                    <img class="img-thumbnail" src="{{ asset('storage/'. $data->gambar) }}" alt="k">
+                    <input type="file" name="gambar" class="form-control-file"  >
                     {{-- <input type="text" class="form-control @error('gambar') is-invalid @enderror"  value="{{ $data->gambar  }}"
                     name="gambar"> --}}
+                  
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Harga</label>
@@ -58,7 +61,7 @@
 
                         <option selected>Pilih Kategori</option>
                         @foreach ($kategori as $ktgr)
-                        <option value="{{ $ktgr->id }}"  {{  $ktgr->id == $ktgr->id ? 'selected' : '' }}>{{ $ktgr->kategori }}</option>
+                        <option value="{{ $ktgr->id }}" {{  $ktgr->id == $data->kategori_id ? 'selected' : '' }}>{{ $ktgr->kategori }}</option>
 
                         @endforeach
                     </select>

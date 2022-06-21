@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('template')
 
-@section('content')
+@section('main')
   <h1>user</h1>
 @endsection

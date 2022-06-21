@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Kategori;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Facades\DataTables;
-use App\Exports\UsersExport;
-use App\Models\Kategori;
-use Illuminate\Contracts\Cache\Store;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\File;
 
 
 
@@ -36,7 +37,8 @@ class BarangController extends Controller
                 $ak = $akhir . ' 23:59:00';
                 $data = Barang::whereBetween('created_at', [$aw, $ak])->get();
             } else {
-                $data = Barang::all();
+                $data = Barang::join('kategori', 'barang.kategori_id', '=', 'kategori.id')
+                    ->get();
             }
 
             return Datatables()->of($data)
@@ -130,8 +132,12 @@ class BarangController extends Controller
     public function edit($id)
     {
         //
+
         $data = Barang::find($id);
+
         $kategori = Kategori::all();
+
+
         return view('barang/edit', compact('data', 'kategori'));
     }
 
@@ -145,6 +151,8 @@ class BarangController extends Controller
     public function update(Request $req, $id)
     {
         //
+        // dd($req);
+
         $data = Barang::findOrFail($id);
         $validated = $req->validate([
             'nama_barang' => 'required',
@@ -154,6 +162,7 @@ class BarangController extends Controller
             'stok' => 'required',
             'status' => 'required',
             'kategori_id' => 'required'
+
         ]);
 
         if ($req->file('gambar')) {
