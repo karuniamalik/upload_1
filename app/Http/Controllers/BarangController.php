@@ -28,6 +28,9 @@ class BarangController extends Controller
     public function index(Request $request)
     {
         //
+
+
+
         $awal = $request->awal;
         $akhir = $request->akhir;
 
@@ -38,7 +41,7 @@ class BarangController extends Controller
                 $data = Barang::whereBetween('created_at', [$aw, $ak])->get();
             } else {
                 $data = Barang::join('kategori', 'barang.kategori_id', '=', 'kategori.id')
-                    ->get();
+                    ->select('barang.id', 'barang.nama_barang', 'barang.spesifikasi', 'barang.gambar', 'barang.harga', 'barang.stok', 'barang.status', 'barang.created_at', 'kategori.kategori')->get();
             }
 
             return Datatables()->of($data)
@@ -157,7 +160,7 @@ class BarangController extends Controller
         $validated = $req->validate([
             'nama_barang' => 'required',
             'spesifikasi' => 'required',
-            'gambar' => 'required|image',
+            'gambar' => 'image',
             'harga' => 'required',
             'stok' => 'required',
             'status' => 'required',
@@ -166,8 +169,9 @@ class BarangController extends Controller
         ]);
 
         if ($req->file('gambar')) {
-
             $validated['gambar'] = $req->file('gambar')->store('img');
+        } else {
+            $validated['gambar'] = $data->gambar;
         }
 
         $data->update($validated);

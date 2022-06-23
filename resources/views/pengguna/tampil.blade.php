@@ -5,45 +5,48 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-           
-             <h1>Data User</h1>
+
+            <h1>Data User</h1>
             <div class="mt-3">
-                <a href="pengguna/create" class="btn btn-primary mb-3"> Tambah Data</a> 
+                <a href="pengguna/create" class="btn btn-primary mb-3"> Tambah Data</a>
 
-                  <table class="table table-striped " id="">
-                <thead>
-                    <tr>
-                        <th>Nama </th>
-                        <th>Email</th> 
-                        <th>Jabatan</th>
-                        <th>Action</th>
-                       
-                        
-                    </tr>
-                </thead> 
+                <table class="table table-striped " id="">
+                    <thead>
+                        <tr>
+                            <th>Nama </th>
+                            <th>Email</th>
+                            <th>Jabatan</th>
+                            <th>Action</th>
 
-                  <tbody>
-                    @foreach ($data as $d)
 
-                    <tr>
-                        <td>{{ $d->name }}</td>
-                        <td>{{$d->email }}</td>
-                        <td>{{$d->jabatan }}</td>
-                                           
-                          
+                        </tr>
+                    </thead>
 
-                        <td>
-                            <div>
-                                <a href="{{ url('pengguna/'.$d->id.'/edit') }}" class="btn btn-success"><i class="fas fa-pen"></i></a>
-                                <a href="{{ url('hapuspengguna/'.$d->id) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody> 
-            </table>
-          
+                    <tbody>
+                        @foreach ($data as $d)
+
+                        <tr>
+                            <td>{{ $d->name }}</td>
+                            <td>{{$d->email }}</td>
+                            <td>{{$d->jabatan }}</td>
+
+
+
+                            <td>
+                                <div>
+                                    <a href="{{ url('pengguna/'.$d->id.'/edit') }}" class="btn btn-success"><i
+                                            class="fas fa-pen"></i></a>
+                                    <a href="{{ url('hapuspengguna/'.$d->id) }}" class="btn btn-danger"><i
+                                            class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
         </div>
     </div>
 </div>
-        @endsection
+@endsection

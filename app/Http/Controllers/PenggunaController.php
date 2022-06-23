@@ -28,6 +28,11 @@ class PenggunaController extends Controller
     public function create()
     {
         //
+        $pengguna = User::all();
+        // $data = Barang::find($id);
+
+
+        return view('pengguna/tambah', compact('pengguna'));
     }
 
     /**
@@ -36,9 +41,20 @@ class PenggunaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
         //
+        $validated = $req->validate([
+
+
+            'name' => 'required',
+            'email' => 'required',
+            'jabatan' => 'required',
+
+        ]);
+
+        $data = User::create($validated);
+        return redirect('pengguna')->with('success', 'Data Berhasil Masuk');
     }
 
     /**

@@ -5,14 +5,14 @@
     <div class="row">
         <div class="col">
 
-            <h1>Tambah Barang</h1>
-            <form action="{{ route('kategori.store') }}" method="post" enctype="multipart/form-data">
+            <h1>Tambah Pengguna</h1>
+            <form action="{{ route('pengguna.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Kategori </label>
                     <input type="text" class="form-control @error('kategori') is-invalid @enderror"
-                        value="{{ old('kategori') }}" name="kategori">
+                        value="{{ old('pengguna') }}" name="kategori">
                 </div>
             
 
