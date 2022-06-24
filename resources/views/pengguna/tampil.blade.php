@@ -8,7 +8,7 @@
 
             <h1>Data User</h1>
             <div class="mt-3">
-                <a href="pengguna/create" class="btn btn-primary mb-3"> Tambah Data</a>
+              
 
                 <table class="table table-striped " id="">
                     <thead>

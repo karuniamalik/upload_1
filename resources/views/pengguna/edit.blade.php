@@ -5,29 +5,34 @@
     <div class="row">
         <div class="col">
 
-            <h1>Edit Kategori</h1>
-            <form action="{{  url('kategori/'.$data->id) }}" method="post" enctype="multipart/form-data">
+            <h1>Edit Pengguna</h1>
+            <form action="{{  url('pengguna/'.$data->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Kategori </label>
-                    <input type="text" class="form-control @error('kategori') is-invalid @enderror"
-                        value="{{ $data->kategori }}" name="kategori">
+                    <label for="exampleInputPassword1" class="form-label">Nama Pengguna </label>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                        value="{{ $data->name }}" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Email </label>
+                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                        value="{{ $data->email }}" name="email">
                 </div>
             
 
                 <div class="form-row ml-1">
                 <div class="form-group">
-                     <label for="exampleInputPassword1" class="form-label">Status</label>
+                     <label for="exampleInputPassword1" class="form-label">Jabatan</label>
                     <div class="form-radio">
-                        <input class="form-radio" name="status" type="radio" value="on" {{ $data->status == 'on' ? 'checked' : '' }} id="form-radio">
+                        <input class="form-radio" name="jabatan" type="radio" value="admin" {{ $data->jabatan == 'admin' ? 'checked' : '' }} id="form-radio">
                         <label class="form-check-label mr-3" for="form-radio">
-                            On
+                            admin
                         </label>
-                        <input class="form-radio" name="status" type="radio" value="off" {{ $data->status == 'off' ? 'checked' :'' }} id="form-radio">
+                        <input class="form-radio" name="jabatan" type="radio" value="user" {{ $data->jabatan == 'user' ? 'checked' :'' }} id="form-radio">
                         <label class="form-check-label" for="form-radio">
-                            Off
+                            pengguna
                         </label>
                     </div>
                 </div>

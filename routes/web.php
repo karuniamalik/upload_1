@@ -27,7 +27,7 @@ use App\Http\Controllers\Auth\LoginController;
 //   $data = Barang::all();
 //   return view('welcome', compact('data'));
 // });
-Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // Barang controller
 Route::middleware(['auth', 'admin'])->group(function () {

@@ -28,11 +28,11 @@ class PenggunaController extends Controller
     public function create()
     {
         //
-        $pengguna = User::all();
+        // $data = User::all();
         // $data = Barang::find($id);
 
 
-        return view('pengguna/tambah', compact('pengguna'));
+        // return view('pengguna/tambah', compact('data'));
     }
 
     /**
@@ -44,17 +44,17 @@ class PenggunaController extends Controller
     public function store(Request $req)
     {
         //
-        $validated = $req->validate([
+        // $validated = $req->validate([
 
 
-            'name' => 'required',
-            'email' => 'required',
-            'jabatan' => 'required',
+        //     'name' => 'required',
+        //     'email' => 'required',
+        //     'jabatan' => 'required',
 
-        ]);
+        // ]);
 
-        $data = User::create($validated);
-        return redirect('pengguna')->with('success', 'Data Berhasil Masuk');
+        // $data = User::create($validated);
+        // return redirect('pengguna')->with('success', 'Data Berhasil Masuk');
     }
 
     /**
@@ -77,6 +77,12 @@ class PenggunaController extends Controller
     public function edit($id)
     {
         //
+        $data = User::find($id);
+
+        // $kategori = Kategori::all();
+
+
+        return view('pengguna/edit', compact('data'));
     }
 
     /**
@@ -86,9 +92,21 @@ class PenggunaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
         //
+        $data = User::findOrFail($id);
+        $validated = $req->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'jabatan' => 'required'
+
+        ]);
+
+
+
+        $data->update($validated);
+        return redirect('pengguna')->with('success', 'Data Berhasil di ubah');
     }
 
     /**
@@ -100,5 +118,8 @@ class PenggunaController extends Controller
     public function destroy($id)
     {
         //
+        $data = User::findOrFail($id);
+        $data->delete();
+        return redirect('pengguna')->with('success', 'Data Berhasil di hapus');
     }
 }

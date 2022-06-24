@@ -39,7 +39,7 @@
         <a href="{{ route('home') }}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="{{ route('welcome') }}" class="nav-link">Welcome</a>
       </li>
     
      
@@ -108,16 +108,7 @@
            </a>
            
          </li>
-          <li class="nav-item menu-open">
-           <a href="{{ url('siswa') }}" class="nav-link active">
-             <i class="nav-icon fas fa-tachometer-alt"></i>
-             <p>
-               Kota
-               <i class="right fas fa-angle-left"></i>
-             </p>
-           </a>
-           
-         </li>
+       
           <li class="nav-item menu-open">
            <a href="{{ url('pengguna') }}" class="nav-link active">
              <i class="nav-icon fas fa-tachometer-alt"></i>
