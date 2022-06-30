@@ -17,7 +17,7 @@ class WelcomeController extends Controller
     {
         //
         $data = Barang::all();
-        return view('welcome', compact('data'));
+        return view('front.welcome', compact('data'));
     }
 
     /**

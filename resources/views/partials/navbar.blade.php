@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase  ">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link active" href="{{ route('welcome') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Tentang kami</a>
@@ -36,7 +36,7 @@
 
             <ul class="navbar-nav ms-auto text-uppercase my-2 ">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><img src="{{ asset('img/cart.png') }}" alt=""></a>
+                    <a class="nav-link" href="{{ url('detail_keranjang') }}"><img src="{{ asset('img/cart.png') }}" alt="" >{{ Cart::getTotalQuantity() }}</a>
                 </li>
                 <li class="nav-item ">                  
                     <a class="nav-link btn btn-dark border-light px-4" href="{{ url('login') }}">MASUK</a>                                   

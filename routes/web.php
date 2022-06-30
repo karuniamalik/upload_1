@@ -3,6 +3,7 @@
 use App\Models\Barang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfilController;
@@ -58,3 +59,8 @@ Route::get('user', [BarangController::class, 'user'])->middleware(['auth', 'user
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/tambah_keranjang', [CartController::class, 'tambah_keranjang']);
+Route::get('/detail_keranjang', [CartController::class, 'detail_keranjang']);
+Route::get('/clear', [CartController::class, 'clearAll']);
+Route::put('update_keranjang/{id}', [CartController::class, 'update_keranjang'])->name('update.keranjang');

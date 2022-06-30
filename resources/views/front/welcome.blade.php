@@ -67,7 +67,22 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $item->nama_barang  }}</h5>
                 <p class="card-text">{{ $item->harga  }}</p>
-                <a href="#" class="btn btn-primary">Beli Sekarang</a>
+
+                <form action="{{ url('tambah_keranjang') }}" method="POST" enctype="multipart/form-data">
+                    
+                    @csrf
+
+                    <input type="hidden" value="{{ $item->id }}" name="id">
+                    <input type="hidden" value="{{ $item->nama_barang }}" name="name">
+                    <input type="hidden" value="1" name="quantity">
+                    <input type="hidden" value="{{ $item->harga }}" name="price">
+                    <input type="hidden" value="{{ $item->gambar }}" name="image">
+
+                    <div class="tambah_keranjang">
+                        <button class="btn btn-primary"> Beli Sekarang</button>
+                    </div>
+                </form>
+                {{-- <a class="tambah_keranjang" href="#" class="btn btn-primary">Beli Sekarang</a> --}}
             </div>
         </div>
     </div>
