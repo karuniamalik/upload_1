@@ -6,7 +6,8 @@ use App\Models\Barang;
 use Darryldecode\Cart\Cart;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
-
+use phpDocumentor\Reflection\PseudoTypes\False_;
+use PhpParser\Node\Name\Relative;
 
 class CartController extends Controller
 {
@@ -23,7 +24,7 @@ class CartController extends Controller
                 'image' => $request->image,
             ),
         ));
-        return redirect('/');
+        return redirect('/')->with('success', 'Data Berhasil ditambah');
     }
 
 
@@ -43,8 +44,18 @@ class CartController extends Controller
         CartFacade::update(
             $request->id,
             [
-                'quantity' => $request->quantity
+                'quantity' => [
+                    'relative' => false,
+                    'value' => $request->quantity
+                ]
             ]
         );
+        return redirect('/detail_keranjang')->with('success', 'Data Berhasil diupdate');
+    }
+    public function delete(Request $request)
+    {
+
+        CartFacade::remove($request->id);
+        return redirect('/detail_keranjang')->with('success', 'Data Berhasil dihapus');
     }
 }

@@ -63,4 +63,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/tambah_keranjang', [CartController::class, 'tambah_keranjang']);
 Route::get('/detail_keranjang', [CartController::class, 'detail_keranjang']);
 Route::get('/clear', [CartController::class, 'clearAll']);
-Route::put('update_keranjang/{id}', [CartController::class, 'update_keranjang'])->name('update.keranjang');
+Route::post('update_keranjang', [CartController::class, 'update_keranjang'])->name('update.keranjang');
+Route::get('hapus_keranjang/{id}', [CartController::class, 'delete']);
