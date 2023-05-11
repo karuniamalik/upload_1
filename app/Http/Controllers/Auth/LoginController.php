@@ -42,12 +42,32 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        //  data tidak hilang wlpun sudah logut
+        $data =  session()->get('cart');
         Auth::logout();
-
-        request()->session()->invalidate();
-
-        request()->session()->regenerateToken();
-
+        session()->put('cart', $data);
         return redirect('/');
+        //         // data tidak hilang wlpun sudah logut
+        //     //     $data =  session()->get('cart');
+
+        //     //     $this->guard()->logout();
+
+        //     //     request()->session()->invalidate();
+
+        //     //     request()->session()->regenerate();
+
+        //     //     session()->put('cart', $data);
+
+        //     //     return $this->loggedOut($request) ?: redirect('/');
+        //     // }
+        //     // Auth::logout();
+
+        //     // request()->session()->invalidate();
+
+        //     // request()->session()->regenerateToken();
+
+        //     // return redirect('/login');
+        // }
+
     }
 }

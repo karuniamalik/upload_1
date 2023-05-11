@@ -11,6 +11,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,6 @@ Auth::routes();
 // ketika masuk ke home/ user backand
 Route::get('user', [BarangController::class, 'user'])->middleware(['auth', 'user']);
 
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/tambah_keranjang', [CartController::class, 'tambah_keranjang']);
@@ -65,3 +65,14 @@ Route::get('/detail_keranjang', [CartController::class, 'detail_keranjang']);
 Route::get('/clear', [CartController::class, 'clearAll']);
 Route::post('update_keranjang', [CartController::class, 'update_keranjang'])->name('update.keranjang');
 Route::get('hapus_keranjang/{id}', [CartController::class, 'delete']);
+Route::get('/paymentsCek', [PaymentController::class, 'Cek']);
+Route::get('/payments', [PaymentController::class, 'Payment'])->name('payment');
+Route::get('/cekoutTrue', [PaymentController::class, 'cekoutTrue']);
+Route::get('/Transaksi', [PaymentController::class, 'Transaksi']);
+Route::get('/detail_transaksi', [PaymentController::class, 'detail_transaksi']);
+Route::get('/view_transaksi', [PaymentController::class, 'view_transaksi']);
+Route::get('/view_kategori/{id}', [WelcomeController::class, 'show']);
+Route::get('/ceklist', [WelcomeController::class, 'ceklist']);
+// Route::get('view', function () {
+//   return view('front.kategori');
+// });

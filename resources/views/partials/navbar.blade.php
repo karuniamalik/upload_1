@@ -19,35 +19,70 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Belanja
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Baju</a></li>
-                        <li><a class="dropdown-item" href="#">Celana</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Diskon</a></li>
-                        <li><a class="dropdown-item" href="#">Promo</a></li>
+                    <ul class="dropdown-menu scrollable-menu" aria-labelledby="navbarDropdown">
+
+                        <x-kategori>
+
+                        </x-kategori>
+
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Kategori</a>
-                </li>
+
+                <form class="d-flex">
+                    <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+                    {{-- <button class="btn btn-outline-success" type="submit">Search</button>  --}}
+                </form>
             </ul>
 
-            <ul class="navbar-nav ms-auto text-uppercase my-2 ">
+            <ul class="navbar-nav ms-auto text-uppercase my-2  ">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('detail_keranjang') }}"><img src="{{ asset('img/cart.png') }}" alt="" >{{ Cart::getTotalQuantity() }}</a>
+                    @if (Auth::user())
+                        <a class="nav-link" href="{{ url('detail_keranjang') }}"><img src="{{ asset('img/cart.png') }}"
+                                alt="">{{ Cart::session(Auth::user()->id)->getContent()->count() }}</a>
+                    @endif
+
                 </li>
-                <li class="nav-item ">                  
-                    <a class="nav-link btn btn-dark border-light px-4" href="{{ url('login') }}">MASUK</a>                                   
+
+                @guest
+                    <a class="nav-link" href="{{ url('detail_keranjang') }}"><img src="{{ asset('img/cart.png') }}"
+                            alt="">{{ Cart::getContent()->count() }}</a>
+                    <li class="nav-item ">
+                        <a class="nav-link btn btn-dark border-light px-4" href="{{ url('login') }}">MASUK</a>
+                    </li>
+                    <li class="nav-item me-0">
+                        <a class="nav-link btn btn-dark px-4 border-light" href="{{ url('register') }}">DAFTAR</a>
+                    </li>
+                @else
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @if (Auth::user()->jabatan == 'admin')
+                                <li>
+                                <li><a class="dropdown-item" href="{{ url('/barang') }}">Dashboard</a></li>
+
+                    </li>
+                @else
+                    <li>
+                    <li><a class="dropdown-item" href="{{ url('/user') }}">Dashboard</a></li>
+
+                    </li>
+                    @endif
+
+                    <li>
+                        <form action="/logout" method="POST">
+                            @csrf
+                            <button class="dropdown-item">LOGOUT</button>
+                        </form>
+                    </li>
+
+                </ul>
                 </li>
-                <li class="nav-item me-0">
-             
-                    <a class="nav-link btn btn-dark px-4 border-light" href="{{ url('register') }}">DAFTAR</a>                                   
-                </li>
+            @endguest
             </ul>
         </div>
     </div>
 </nav>
-
- 

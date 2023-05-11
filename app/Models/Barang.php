@@ -18,6 +18,6 @@ class Barang extends Model
         'harga',
         'stok',
         'status',
-        'kategori_id'
+        // 'kategori_id'
     ];
 }

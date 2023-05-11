@@ -13,7 +13,8 @@ class Kategori extends Model
     // cek yang bisa di edit
     protected $fillable = [
         'kategori',
-        'status'
+        'status',
+        'jenis_kategori'
 
     ];
 }

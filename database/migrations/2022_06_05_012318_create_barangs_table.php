@@ -21,10 +21,10 @@ class CreateBarangsTable extends Migration
             $table->integer('harga');
             $table->tinyInteger('stok');
             $table->enum('status', ['on', 'off']);
-            $table->foreignId('kategori_id');
+            // $table->foreignId('kategori_id');
             $table->timestamps();
 
-            $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

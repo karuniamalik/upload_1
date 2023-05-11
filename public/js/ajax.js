@@ -1,4 +1,5 @@
 load()
+
 $('#input').click(function(e) {
     e.preventDefault();
     let awal = $('#awal').val()
@@ -11,7 +12,10 @@ $('#reset').click(function(e) {
     e.preventDefault();
     $('#tabeldata').DataTable().destroy();
     load()
+
 });
+
+
 
 function load(awal = '', akhir = '') {
     $('#tabeldata').DataTable({
@@ -23,7 +27,8 @@ function load(awal = '', akhir = '') {
             data: {
                 awal: awal,
                 akhir: akhir
-            }
+            },
+
         },
         columns: [{
                 data: 'nama_barang',
@@ -36,7 +41,10 @@ function load(awal = '', akhir = '') {
             },
             {
                 data: 'gambar',
-                name: 'gambar'
+                name: 'gambar',
+                render: function(data, type, full, meta) {
+                    return "<img src=\"storage/" + data + "\" height=\"150\"  alt='No Image'/>";
+                }
             },
             {
                 data: 'harga',
@@ -50,10 +58,7 @@ function load(awal = '', akhir = '') {
                 data: 'status',
                 name: 'status'
             },
-            {
-                data: 'kategori',
-                name: 'kategori'
-            },
+
             {
                 data: 'created_at',
                 name: 'created_at'
@@ -70,3 +75,6 @@ function load(awal = '', akhir = '') {
         ]
     });
 }
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});

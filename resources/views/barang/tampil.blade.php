@@ -1,39 +1,38 @@
 @extends('template')
 
 @section('main')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col">
+                <h1>Data barang</h1>
+                <a href="barang/create " class="btn btn-primary mb-3"> Tambah Data</a>
 
-            <h1>Data barang</h1>
-            <a href="barang/create " class="btn btn-primary mb-3"> Tambah Data</a>
+                <form action="" class="form-inline">
+                    <input type="date" id="awal" class="form-control">
+                    <input type="date" id="akhir" class="form-control mx-2">
+                    <input type="button" id="input" class="btn btn-success" value="cari">
+                    <input type="button" id="reset" class="btn btn-success" value="reset">
+                    <a href="{{ url('export') }}" class="btn btn-success">Export</a>
 
-<form action="" class="form-inline">
-    <input type="date" id="awal" class="form-control">
-    <input type="date" id="akhir" class="form-control mx-2">
-    <input type="button" id="input" class="btn btn-success" value="cari">
-    <input type="button" id="reset" class="btn btn-success" value="reset">
-    <a href="{{ url('export') }}" class="btn btn-success">Export</a>
+                </form>
 
-</form>
+                <table class="table table-striped " id="tabeldata">
+                    <thead>
+                        <tr>
+                            <th>Nama Barang</th>
+                            <th>Spesifikasi</th>
+                            <th>Gambar</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Status</th>
+                            {{-- <th>Kategori</th> --}}
+                            <th>Tanggal</th>
+                            <th>Action</th>
 
-            <table class="table table-striped " id="tabeldata">
-                <thead>
-                    <tr>
-                        <th>Nama Barang</th>
-                        <th>Spesifikasi</th>
-                        <th>Gambar</th>
-                        <th>Harga</th>
-                        <th>Stok</th>
-                        <th>Status</th>
-                        <th>Kategori</th>
-                        <th>Tanggal</th>
-                        <th>Action</th>
-
-                    </tr>
-                </thead>
-                {{-- <tbody>
+                        </tr>
+                    </thead>
+                    {{-- <tbody>
                     @foreach ($data as $d)
 
                     <tr>
@@ -53,8 +52,8 @@
                     </tr>
                     @endforeach
                 </tbody> --}}
-            </table>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 @endsection

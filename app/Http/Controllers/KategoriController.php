@@ -45,6 +45,7 @@ class KategoriController extends Controller
 
             'kategori' => 'required',
             'status' => 'required',
+            'jenis_kategori' => 'required',
 
         ]);
 
@@ -91,6 +92,7 @@ class KategoriController extends Controller
         $validated = $req->validate([
             'kategori' => 'required',
             'status' => 'required',
+            'jenis_kategori' => 'required',
         ]);
 
 

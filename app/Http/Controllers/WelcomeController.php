@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Kategori;
 
 class WelcomeController extends Controller
 {
@@ -16,8 +17,10 @@ class WelcomeController extends Controller
     public function index()
     {
         //
-        $data = Barang::all();
-        return view('front.welcome', compact('data'));
+        $data = Barang::paginate(3);
+        $kategori = Kategori::where('status', '=', 'on')->get();
+
+        return view('front.welcome', compact('data', 'kategori'));
     }
 
     /**
@@ -49,7 +52,11 @@ class WelcomeController extends Controller
      */
     public function show($id)
     {
-        //
+        // $data = Barang::all();
+        $data = Barang::where('kategori_id', '=', $id)->paginate(3);
+        // $kategori = Kategori::where('status', '=', 'on')->get();
+        // dd($data);
+        return view('front.welcome', compact('data'));
     }
 
     /**
@@ -84,5 +91,14 @@ class WelcomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function ceklist(Request $request)
+    {
+        //
+        // $kategori = Kategori::where('kategori', '=', $request->result)->get();
+        $data = Barang::where('kategori_id', '=', $request->id)->get();
+        // return json_encode($kategori);
+
+        return json_encode($data);
     }
 }

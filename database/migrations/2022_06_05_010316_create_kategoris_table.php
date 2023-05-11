@@ -17,6 +17,7 @@ class CreateKategorisTable extends Migration
             $table->id();
             $table->string('kategori');
             $table->enum('status', ['on', 'off']);
+            $table->string('jenis_kategori');
             $table->timestamps();
         });
     }
