@@ -15,6 +15,7 @@ use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Util\ArrayCollection;
 use Symfony\Component\Translation\Util\ArrayConverter;
 
 class BarangController extends Controller
@@ -185,51 +186,35 @@ class BarangController extends Controller
             $validated['gambar'] = $data->gambar;
         }
 
-        // dd($req->kategori);
-        // dd($req);
-
-        // if ($req->kategori) {
-        //     foreach ($req->kategori as $kategori2) {
-        //         echo $kategori2 . '<br>';
-        //         foreach ($dataDetailKategori as $d_ktgr) {
-        //             echo 'ini kategori id' .
-        //                 $d_ktgr->kategori_id  . '<br>';
-        //             if ($kategori2 == $d_ktgr->kategori_id) {
-        //                 echo "ada dan di biarkan<br> ";
-        //             } else if ($kategori2 != $d_ktgr->kategori_id) {
-        //                 echo "gk ada dan di tambah<br>";
-        //             } else if (!$kategori2 == $d_ktgr->kategori_id) {
-        //                 echo "klo gk di pake di hapus<br>";
-        //             }
-        //         }
-        //     }
-        // $dataDetailsKategori = DetailsKategori::where('barang_id', '=', $id)->where('kategori_id', '=', $kategori2)->get();
-        // $data->update($validated);
-        // $dataDetailsKategori->updated($req->kategori2);
-        // }
-        // die();
-
-        $dataDetailKategoriCek =
-            DetailsKategori::where('barang_id', '=', $id)->get();
+        $data = [];
         foreach ($dataDetailKategori as $d_ktgr) {
 
+            $data[] =
+                $d_ktgr->kategori_id;
+        }
 
-            if ($req->kategori) {
-                foreach ($req->kategori as $kategori2) {
-                    dd($kategori2);
-                    if (in_array("$d_ktgr->kategori_id", $dataDetailKategoriCek)) {
-                        echo "Match found";
-                    } else {
-                        echo "Match not found";
-                    }
+        if ($req->kategori) {
+            foreach ($req->kategori as $kategori2) {
+                // print_r($data);
+                // echo $kategori2;
+                if (!in_array($kategori2, $data)) {
+                    echo " $kategori2 .di tambah" . '<br>';
+                    $item = DetailsKategori::create([
+                        'barang_id' =>  $id,
+                        'kategori_id' => $kategori2
+                    ]);
+                    // } else if (in_array($kategori2, $data)) {
+                    //     echo " $kategori2 .di biarin" . '<br>';
                 }
             }
+            $kategoriHapus = array_diff($data, $req->kategori);
+            foreach ($kategoriHapus as $kategori) {
+                echo "$kategori .di hapus" . '<br>';
+                $hapus = DetailsKategori::where('barang_id', $id)->where('kategori_id', $kategori)->delete();
+            }
         }
-        die();
+        // die();
 
-        // else {
-        //     return redirect("barang/$id/edit");
-        // }
         return redirect('barang')->with('success', 'Data Berhasil di ubah');
     }
 

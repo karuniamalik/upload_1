@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
 
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/simplePagination.css') }}" />
-    <script type="text/javascript" src="{{ asset('js/jquery.simplePagination.js') }}"></script>
+    {{-- <link type="text/css" rel="stylesheet" href="{{ asset('css/simplePagination.css') }}" />
+    <script type="text/javascript" src="{{ asset('js/jquery.simplePagination.js') }}"></script> --}}
     {{-- select2 --}}
 
     <link

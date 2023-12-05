@@ -20,4 +20,10 @@ class Barang extends Model
         'status',
         // 'kategori_id'
     ];
+
+    public function detailsKategori()
+    {
+        # code...
+        return $this->hasMany(DetailsKategori::class);
+    }
 }

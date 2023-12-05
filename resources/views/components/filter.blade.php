@@ -14,13 +14,13 @@
         </h5>
     @endif
 
-
     <div class="collapse" id="collapse{{ $jenis }}">
         @isset($kategori)
             @foreach ($kategori as $pakaian)
+                {{-- @dd($kategori) --}}
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="{{ $pakaian->kategori }}"
-                        id="{{ $pakaian->kategori }}" onclick="ambil_id({{ $pakaian->id }})">
+                    <input class="form-check-input" type="checkbox" value="{{ $pakaian->id }}" id="kategori"
+                        onclick="ambil_id()">
                     <label class="form-check-label" for="flexCheckDefault">
                         {{ $pakaian->kategori }}
                     </label>

@@ -1,4 +1,4 @@
-const { map, divide } = require("lodash");
+// const { map, divide } = require("lodash");
 
 $('#bayar').click(function(e) {
     e.preventDefault();
@@ -73,6 +73,7 @@ $('#bayar').click(function(e) {
                         success: function(response) {
                             console.log(response);
                             location.reload();
+
                         }
 
                     });
@@ -84,34 +85,49 @@ $('#bayar').click(function(e) {
 
 });
 
-function ambil_id(id) {
-    $.ajax({
-        type: "get",
-        url: "ceklist",
-        data: { id: id },
-        dataType: "json",
-        success: function(response) {
-            console.log(response);
-            let csrf = $('meta[name="csrf-token"]').attr('content')
-                // console.log(csrf);
-            $('#produk').children().remove();
-            $('#pagination').remove();
-            response.map((e, i) => $('#produk').append(`
+
+
+function ambil_id() {
+
+    var checkboxes = document.querySelectorAll('input[id="kategori"]:checked'),
+        values = [];
+    Array.prototype.forEach.call(checkboxes, function(el) {
+        values.push(el.value);
+        return values;
+    });
+
+    // console.log(values);
+
+    // isChecked = [];
+    if (values) {
+        // console.log(id);
+        $.ajax({
+            type: "get",
+            url: "ceklist",
+            data: { id: values },
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+                let csrf = $('meta[name="csrf-token"]').attr('content')
+                    // console.log(csrf);
+                $('#produk').children().remove();
+                $('#pagination').remove();
+                response.map((e, i) => $('#produk').append(`
              <div class="col-md-4 mb-4">
              <div class="card ">
                             <img class="img-thumbnail" style="width:100%; height:200px; object-fit: contain"
-                                src="storage/${ e.gambar}" alt="k">
+                                src="storage/${e.gambar}" alt="k">
                             <div class="card-body ">
-                                <h5 class="card-title">${ e.nama_barang }</h5>
-                                <p class="card-text">${e.harga }</p>
+                                <h5 class="card-title">${e.nama_barang}</h5>
+                                <p class="card-text">${e.harga}</p>
                                 <form  action="tambah_keranjang" method="POST" enctype="multipart/form-data">
                                                                     
-                                    <input type="hidden" value="${csrf }" name="_token">
-                                    <input type="hidden" value="${e.id }" name="id">
-                                    <input type="hidden" value="${e.nama_barang }" name="name">
+                                    <input type="hidden" value="${csrf}" name="_token">
+                                    <input type="hidden" value="${e.id}" name="id">
+                                    <input type="hidden" value="${e.nama_barang}" name="name">
                                     <input type="hidden" value="1" name="quantity">
-                                    <input type="hidden" value="${ e.harga }" name="price">
-                                    <input type="hidden" value="${e.gambar }" name="image">
+                                    <input type="hidden" value="${e.harga}" name="price">
+                                    <input type="hidden" value="${e.gambar}" name="image">
 
                                     <div class="tambah_keranjang">
                                         <button class="btn btn-primary">Beli Sekarang</button>
@@ -124,17 +140,18 @@ function ambil_id(id) {
                          </div>
                                                
                         `))
-        }
+            }
 
-    });
-
-
-    // console.log(terima);
-    $(function() {
-        $('#page').pagination({
-            items: 100,
-            itemsOnPage: 10,
-            cssStyle: 'light-theme'
         });
-    });
+
+
+        // console.log(terima);
+        // $(function() {
+        //     $('#page').pagination({
+        //         items: 100,
+        //         itemsOnPage: 10,
+        //         cssStyle: 'light-theme'
+        //     });
+        // });
+    }
 }

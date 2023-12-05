@@ -40,7 +40,6 @@
                         <a class="nav-link" href="{{ url('detail_keranjang') }}"><img src="{{ asset('img/cart.png') }}"
                                 alt="">{{ Cart::session(Auth::user()->id)->getContent()->count() }}</a>
                     @endif
-
                 </li>
 
                 @guest

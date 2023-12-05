@@ -19,7 +19,8 @@ class UsersExport implements FromArray, WithHeadings
     //
     public function array(): array
     {
-        return Barang::select('nama_barang', 'spesifikasi', 'gambar', 'harga', 'kategori_id')->join('kategori', 'barang.kategori_id', '=', 'kategori.id')->get()->toArray();
+        // return Barang::select('nama_barang', 'spesifikasi', 'gambar', 'harga')->join('kategori', 'barang.kategori_id', '=', 'kategori.id')->get()->toArray();
+        return Barang::select('nama_barang', 'spesifikasi', 'harga', 'created_at')->get()->toArray();
     }
 
     // public function map($siswa): array
@@ -40,9 +41,11 @@ class UsersExport implements FromArray, WithHeadings
         return [
             'Nama barang',
             'Spesifikasi',
-            'Gambar',
             'Harga',
-            'Kategori'
+            'Created_at',
+
+
+            // 'Kategori'
 
 
         ];

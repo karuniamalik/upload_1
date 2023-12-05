@@ -81,33 +81,66 @@
         </div>
         <div class="col-md-10">
             <div class="row" id="produk">
+
                 @foreach ($data as $item)
-                    <div class="col-md-4 mb-4">
-                        <div class="card ">
-                            <img class="img-thumbnail" style="width:100%; height:200px; object-fit: contain"
-                                src="{{ asset('storage/' . $item->gambar) }}" alt="k">
-                            <div class="card-body ">
-                                <h5 class="card-title">{{ $item->nama_barang }}</h5>
+                    @if (!empty($id))
+                        <div class="col-md-4 mb-4">
+                            <div class="card ">
+                                <img class="img-thumbnail" style="width:100%; height:200px; object-fit: contain"
+                                    src="{{ asset('storage/' . $item->barang->gambar) }}" alt="k">
+                                <div class="card-body ">
+                                    <h5 class="card-title">{{ $item->barang->nama_barang }}</h5>
 
-                                <p class="card-text">{{ $item->harga }}</p>
+                                    <p class="card-text">{{ $item->barang->harga }}</p>
 
-                                <form action="{{ url('tambah_keranjang') }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ url('tambah_keranjang') }}" method="POST"
+                                        enctype="multipart/form-data">
 
-                                    @csrf
-                                    <input type="hidden" value="{{ $item->id }}" name="id">
-                                    <input type="hidden" value="{{ $item->nama_barang }}" name="name">
-                                    <input type="hidden" value="1" name="quantity">
-                                    <input type="hidden" value="{{ $item->harga }}" name="price">
-                                    <input type="hidden" value="{{ $item->gambar }}" name="image">
+                                        @csrf
+                                        <input type="hidden" value="{{ $item->barang->id }}" name="id">
+                                        <input type="hidden" value="{{ $item->barang->nama_barang }}" name="name">
+                                        <input type="hidden" value="1" name="quantity">
+                                        <input type="hidden" value="{{ $item->barang->harga }}" name="price">
+                                        <input type="hidden" value="{{ $item->barang->gambar }}" name="image">
 
-                                    <div class="tambah_keranjang">
-                                        <button class="btn btn-primary">Beli Sekarang</button>
-                                    </div>
-                                </form>
-                                {{-- <a class="tambah_keranjang" href="#" class="btn btn-primary">Beli Sekarang</a> --}}
+                                        <div class="tambah_keranjang">
+                                            <button class="btn btn-primary">Beli Sekarang</button>
+                                        </div>
+                                    </form>
+                                    {{-- <a class="tambah_keranjang" href="#" class="btn btn-primary">Beli Sekarang</a> --}}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+
+                    @if (empty($id))
+                        <div class="col-md-4 mb-4">
+                            <div class="card ">
+                                <img class="img-thumbnail" style="width:100%; height:200px; object-fit: contain"
+                                    src="{{ asset('storage/' . $item->gambar) }}" alt="k">
+                                <div class="card-body ">
+                                    <h5 class="card-title">{{ $item->nama_barang }}</h5>
+
+                                    <p class="card-text">{{ $item->harga }}</p>
+
+                                    <form action="{{ url('tambah_keranjang') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" value="{{ $item->id }}" name="id">
+                                        <input type="hidden" value="{{ $item->nama_barang }}" name="name">
+                                        <input type="hidden" value="1" name="quantity">
+                                        <input type="hidden" value="{{ $item->harga }}" name="price">
+                                        <input type="hidden" value="{{ $item->gambar }}" name="image">
+
+                                        <div class="tambah_keranjang">
+                                            <button class="btn btn-primary">Beli Sekarang</button>
+                                        </div>
+                                    </form>
+                                    {{-- <a class="tambah_keranjang" href="#" class="btn btn-primary">Beli Sekarang</a> --}}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
 
             </div>
@@ -120,9 +153,9 @@
             <div style="float: right" id="pagination">
                 {{ $data->links('pagination::bootstrap-4') }}
             </div>
-            <div style="float: right" id="page">
+            {{-- <div style="float: right" id="page">
 
-            </div>
+            </div> --}}
 
         </div>
 

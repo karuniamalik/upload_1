@@ -38,7 +38,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::get('hapusbarang/{id}', [BarangController::class, 'destroy']);
   Route::get('export', [BarangController::class, 'export']);
 
-
   Route::resource('kategori', KategoriController::class)->only('index', 'store', 'create', 'edit');
   Route::put('kategori/{id}', [KategoriController::class, 'update']);
   Route::get('hapuskategori/{id}', [KategoriController::class, 'destroy']);
@@ -73,6 +72,7 @@ Route::get('/detail_transaksi', [PaymentController::class, 'detail_transaksi']);
 Route::get('/view_transaksi', [PaymentController::class, 'view_transaksi']);
 Route::get('/view_kategori/{id}', [WelcomeController::class, 'show']);
 Route::get('/ceklist', [WelcomeController::class, 'ceklist']);
+//  Route::get('/test/{id}', [WelcomeController::class, 'edit']);
 // Route::get('view', function () {
 //   return view('front.kategori');
 // });

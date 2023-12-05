@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DetailsKategori;
 use App\Models\Kategori;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Foreach_;
 
 class WelcomeController extends Controller
 {
@@ -16,8 +19,8 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        //
-        $data = Barang::paginate(3);
+
+        $data = Barang::paginate(3)->withQueryString();
         $kategori = Kategori::where('status', '=', 'on')->get();
 
         return view('front.welcome', compact('data', 'kategori'));
@@ -52,13 +55,11 @@ class WelcomeController extends Controller
      */
     public function show($id)
     {
-        // $data = Barang::all();
-        $data = Barang::where('kategori_id', '=', $id)->paginate(3);
-        // $kategori = Kategori::where('status', '=', 'on')->get();
-        // dd($data);
-        return view('front.welcome', compact('data'));
-    }
 
+        $data = DetailsKategori::where('kategori_id', $id)->paginate(3);
+
+        return view('front.welcome', compact('data', 'id'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -67,7 +68,13 @@ class WelcomeController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        // $data = DB::select("SELECT * FROM details_kategori 
+        // JOIN barang ON details_kategori.barang_id = barang.id
+        // WHERE kategori_id IN (3,4)
+        // GROUP BY nama_barang");
+
+        // dd($data);
     }
 
     /**
@@ -95,10 +102,16 @@ class WelcomeController extends Controller
     public function ceklist(Request $request)
     {
         //
-        // $kategori = Kategori::where('kategori', '=', $request->result)->get();
-        $data = Barang::where('kategori_id', '=', $request->id)->get();
-        // return json_encode($kategori);
+        if (!empty($request->id)) {
+            $arr = collect($request->id)->implode(',');
 
+            $data = DB::select("SELECT * FROM details_kategori 
+            JOIN barang ON details_kategori.barang_id = barang.id
+            WHERE kategori_id IN ($arr)
+            GROUP BY nama_barang");
+        } else {
+            $data = DetailsKategori::join('barang', 'barang.id', '=', 'details_kategori.barang_id')->groupBy('nama_barang')->get();
+        }
         return json_encode($data);
     }
 }
